@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory Management - TecnoInnova S.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-container": "#57657b",
+                        "surface": "#f7f9fb",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "surface-tint": "#565e74",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-tertiary-fixed": "#001a42",
+                        "secondary-container": "#d5e3fd",
+                        "background": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#000000",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#131b2e",
+                        "inverse-primary": "#bec6e0",
+                        "on-tertiary-container": "#3980f4",
+                        "on-primary-container": "#7c839b",
+                        "tertiary-fixed": "#d8e2ff",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "surface-variant": "#e0e3e5",
+                        "on-surface-variant": "#45464d",
+                        "error-container": "#ffdad6",
+                        "primary": "#000000",
+                        "outline": "#76777d",
+                        "tertiary-container": "#001a42",
+                        "secondary": "#515f74",
+                        "secondary-fixed": "#d5e3fd",
+                        "on-primary-fixed": "#131b2e",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "outline-variant": "#c6c6cd",
+                        "surface-container-highest": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#dae2fd",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-tertiary-fixed-variant": "#004395"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "4px",
+                        "xl": "40px",
+                        "gutter": "20px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "margin": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f7f9fb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="font-body-md text-body-md text-on-surface antialiased flex h-screen overflow-hidden bg-background">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-primary-fixed font-headline-sm text-headline-sm fixed left-0 top-0 h-screen w-60 border-r border-outline-variant flex-col py-lg z-20">
+<div class="px-md mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-sm">security</span>
+</div>
+<span class="text-headline-sm font-bold text-on-primary-container">TecnoInnova S.A.</span>
+</div>
+<p class="font-label-md text-label-md text-on-primary-container/70 ml-11">Enterprise Management</p>
+</div>
+<div class="px-md mb-6">
+<button class="w-full bg-primary-fixed text-on-primary-container rounded py-2 px-4 flex items-center justify-center gap-2 font-label-md text-label-md hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm">add_alert</span>
+                New System Alert
+            </button>
+</div>
+<ul class="flex-1 flex flex-col gap-1 px-sm">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-primary-container/70 hover:bg-on-primary-container/5 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-primary-container/70 hover:bg-on-primary-container/5 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-primary-container/70 hover:bg-on-primary-container/5 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">engineering</span>
+                    Technicians
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-primary-fixed bg-on-primary-container/10 border-r-4 border-tertiary-fixed opacity-100 transition-opacity duration-150 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+                    Inventory
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-primary-container/70 hover:bg-on-primary-container/5 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+                    Billing
+                </a>
+</li>
+</ul>
+<div class="mt-auto px-sm flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-primary-container/70 hover:bg-on-primary-container/5 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-primary-container/70 hover:bg-on-primary-container/5 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                Help Center
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-60 h-screen overflow-hidden bg-background">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface text-primary dark:text-primary-fixed font-body-md text-body-md docked full-width top-0 border-b border-outline-variant flex justify-between items-center w-full px-margin h-16 z-10 shrink-0">
+<div class="flex items-center gap-4">
+<div class="md:hidden">
+<button class="p-2 rounded hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Search Bar (on_left) -->
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface rounded border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary-container transition-shadow text-body-sm font-body-sm w-64 placeholder-on-surface-variant/60 outline-none" placeholder="Search inventory..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 rounded text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden cursor-pointer">
+<img alt="Administrator Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyJMJ0ln0AJjYEMDBuIhq9pjqvIDEQuWPPQq4ogZiYL9McqBfmYEHW8KmTi7bXcIqwoOFbF-0dHX0TtdYvG201RZ-Yib2zRdJNrC1kEXxSuF9kJQ18W2QqIL8IsFufeF3AbFwHA-xx_HKHlvTs_vu1-sEAMLmUbFKp_D6YHY2M7XpFjNWzELRe7rNsLWfeEPZqiKLTBRO_TVKcZ0Dlfe7UUymaQmAZmcErQsP3eT6-orT2nqMFuCyd"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 overflow-y-auto p-4 md:p-margin">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Inventory Control</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage security equipment stock, monitor shortages, and track restocking requests.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-lowest border border-primary text-primary px-4 py-2 rounded font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export List
+                    </button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded font-label-md text-label-md flex items-center gap-2 hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Request Stock
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout for Dashboard Overview -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- Total Items Widget -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col justify-between hover:bg-surface-bright transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-container rounded-lg text-on-primary-container">
+<span class="material-symbols-outlined">inventory</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Total SKU</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-on-surface">1,248</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed-dim">trending_up</span>
+<span>+12 this month</span>
+</div>
+</div>
+</div>
+<!-- Low Stock Alert Widget -->
+<div class="bg-error-container/20 border border-error/30 rounded-xl p-md flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error text-on-error rounded-lg">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="font-label-md text-label-md text-error">Critical Stock</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-on-surface">15</div>
+<div class="font-body-sm text-body-sm text-error flex items-center gap-1 mt-1">
+<span>Items require immediate attention</span>
+</div>
+</div>
+</div>
+<!-- Pending Restocks Widget -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col justify-between hover:bg-surface-bright transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-container rounded-lg text-on-secondary-container">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Pending Orders</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-on-surface">8</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Awaiting provider fulfillment</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Inventory Table Section -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col">
+<div class="px-md py-4 border-b border-surface-container-high flex flex-col sm:flex-row justify-between items-center gap-4 bg-surface-bright">
+<h2 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">list_alt</span>
+                        Equipment Roster
+                    </h2>
+<div class="flex gap-2 w-full sm:w-auto">
+<div class="relative flex-1 sm:w-48">
+<select class="w-full appearance-none bg-surface border border-outline-variant text-on-surface font-body-sm text-body-sm py-1.5 pl-3 pr-8 rounded outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+<option>All Categories</option>
+<option>Cameras (CCTV)</option>
+<option>Motion Sensors</option>
+<option>Alarm Systems</option>
+<option>Access Control</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px] pointer-events-none">expand_more</span>
+</div>
+<div class="relative flex-1 sm:w-48">
+<select class="w-full appearance-none bg-surface border border-outline-variant text-on-surface font-body-sm text-body-sm py-1.5 pl-3 pr-8 rounded outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Stock Status: All</option>
+<option>In Stock</option>
+<option>Low Stock</option>
+<option>Out of Stock</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px] pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-3 px-md font-label-md text-label-md text-on-surface-variant font-semibold">SKU / Item Name</th>
+<th class="py-3 px-md font-label-md text-label-md text-on-surface-variant font-semibold">Category</th>
+<th class="py-3 px-md font-label-md text-label-md text-on-surface-variant font-semibold">Current Stock</th>
+<th class="py-3 px-md font-label-md text-label-md text-on-surface-variant font-semibold">Min. Threshold</th>
+<th class="py-3 px-md font-label-md text-label-md text-on-surface-variant font-semibold">Status</th>
+<th class="py-3 px-md font-label-md text-label-md text-on-surface-variant font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<!-- Row 1: Low Stock (Highlight) -->
+<tr class="border-b border-outline-variant bg-error-container/10 hover:bg-surface-bright transition-colors group">
+<td class="py-3 px-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded border border-outline-variant overflow-hidden flex-shrink-0">
+<div class="bg-cover bg-center w-full h-full opacity-80 mix-blend-multiply" data-alt="Close up of a sleek, modern dome security camera mounted on a clean white ceiling, soft studio lighting emphasizing its technical design, highly detailed, realistic corporate aesthetic, neutral color palette with black and white tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDo2rHIoSaF0cGZ79ZwTYY4IR7uT4KrG2o0y8OlgQ-72zE-eQrBExaTnqGEk5HYP5e98HkYi0tHxow6X1uiONf1-BOtP-eqRkSYKBtWeeH4A4XgecOmNxFzFsQrILjrgY5MR2QnQp_bUfr6JsDMuU3_g4MIq0taVxXGoPTRsrzdlgKbDfaThTjVphLGFvsfTvSWgAyyHG0md9Z3mmi0NuXbwz_HEMczcs6qNAT3Xi25q9Ge4c9IPHtw')"></div>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">CAM-DME-04K</div>
+<div class="text-on-surface-variant truncate w-48">Dome Camera 4K IR Indoor</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-md text-on-surface-variant">CCTV</td>
+<td class="py-3 px-md font-label-md text-label-md text-error">5 Units</td>
+<td class="py-3 px-md text-on-surface-variant">15 Units</td>
+<td class="py-3 px-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error-container text-on-error-container font-label-md text-label-md gap-1">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                                        Low Stock
+                                    </span>
+</td>
+<td class="py-3 px-md text-right">
+<button class="text-primary hover:text-on-primary-fixed-variant transition-colors p-1">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Pending Restock -->
+<tr class="border-b border-outline-variant hover:bg-surface-bright transition-colors group bg-surface">
+<td class="py-3 px-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded border border-outline-variant overflow-hidden flex-shrink-0 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">sensors</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">SEN-MOT-PIR</div>
+<div class="text-on-surface-variant truncate w-48">PIR Motion Sensor Pro</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-md text-on-surface-variant">Sensors</td>
+<td class="py-3 px-md font-label-md text-label-md text-on-surface">12 Units</td>
+<td class="py-3 px-md text-on-surface-variant">20 Units</td>
+<td class="py-3 px-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-secondary-container text-on-secondary-container font-label-md text-label-md gap-1">
+<span class="material-symbols-outlined text-[14px]">sync</span>
+                                        Restocking (50)
+                                    </span>
+</td>
+<td class="py-3 px-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Healthy Stock -->
+<tr class="border-b border-outline-variant hover:bg-surface-bright transition-colors group bg-surface-bright">
+<td class="py-3 px-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded border border-outline-variant overflow-hidden flex-shrink-0 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">door_front</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">ACC-MAG-LOK</div>
+<div class="text-on-surface-variant truncate w-48">Magnetic Door Lock 600lbs</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-md text-on-surface-variant">Access Control</td>
+<td class="py-3 px-md font-label-md text-label-md text-on-surface">45 Units</td>
+<td class="py-3 px-md text-on-surface-variant">10 Units</td>
+<td class="py-3 px-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-md text-label-md gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                        Adequate
+                                    </span>
+</td>
+<td class="py-3 px-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Healthy Stock -->
+<tr class="border-b border-outline-variant hover:bg-surface-bright transition-colors group bg-surface">
+<td class="py-3 px-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded border border-outline-variant overflow-hidden flex-shrink-0 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">videocam</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">CAM-BUL-1080</div>
+<div class="text-on-surface-variant truncate w-48">Bullet Camera 1080p Ext</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-md text-on-surface-variant">CCTV</td>
+<td class="py-3 px-md font-label-md text-label-md text-on-surface">32 Units</td>
+<td class="py-3 px-md text-on-surface-variant">15 Units</td>
+<td class="py-3 px-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-md text-label-md gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                        Adequate
+                                    </span>
+</td>
+<td class="py-3 px-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-md py-3 flex items-center justify-between border-t border-outline-variant bg-surface-bright">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 4 of 1,248 entries</span>
+<div class="flex gap-1">
+<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="px-2 py-1 rounded bg-primary text-on-primary font-label-md text-label-md">1</button>
+<button class="px-2 py-1 rounded text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors">2</button>
+<button class="px-2 py-1 rounded text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors">3</button>
+<span class="px-2 py-1 text-on-surface-variant">...</span>
+<button class="p-1 rounded text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recent Restocking Requests Panel (Bottom/Side area depending on screen) -->
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Panel 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4 border-b border-surface-container-high pb-2">Pending Supplier Requests</h3>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center justify-between p-3 border border-outline-variant rounded bg-surface">
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">REQ-0092: Sony Electronics</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">50x PIR Motion Sensor Pro</div>
+</div>
+<div class="text-right">
+<div class="font-label-md text-label-md text-primary">Expected: Oct 12</div>
+<span class="inline-block mt-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-semibold uppercase tracking-wider">In Transit</span>
+</div>
+</li>
+<li class="flex items-center justify-between p-3 border border-outline-variant rounded bg-surface">
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">REQ-0091: Hikvision</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">20x Dome Camera 4K IR Indoor</div>
+</div>
+<div class="text-right">
+<div class="font-label-md text-label-md text-on-surface-variant">Expected: Oct 15</div>
+<span class="inline-block mt-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-semibold uppercase tracking-wider">Processing</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</main>
+</div>
+</body></html>
