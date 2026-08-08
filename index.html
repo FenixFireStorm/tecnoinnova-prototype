@@ -28,6 +28,29 @@
         🔒 Módulo SecureLogic / Adicional
       </a>
     </div>
-  </div>
+
+    <!-- BOTÓN DE CERRAR -->
+    <div class="mt-8 pt-6 border-t border-slate-200 text-center">
+  <button 
+    onclick="intentarCerrar()" 
+    class="px-5 py-2.5 bg-slate-700 hover:bg-slate-800 text-white font-medium rounded-lg shadow transition-colors inline-flex items-center gap-2">
+    <span>❌</span>
+    Cerrar Prototipo
+  </button>
+  <!-- Mensaje discreto en texto en lugar de un alert emergente molesto -->
+  <p id="mensaje-cierre" class="text-xs text-slate-500 mt-2 hidden">
+    Puedes cerrar esta pestaña directamente desde la <b>X</b> de tu navegador.
+  </p>
+</div>
+
+<script>
+  function intentarCerrar() {
+    // Intenta cerrar la ventana
+    window.close();
+    
+    // Si no se cierra por restricciones del navegador, muestra el texto en pantalla (sin alert)
+    document.getElementById('mensaje-cierre').classList.remove('hidden');
+  }
+</script>
 </body>
 </html>
