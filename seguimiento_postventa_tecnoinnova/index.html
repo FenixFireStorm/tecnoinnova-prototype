@@ -1,0 +1,340 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tecnoinnova S.A. - Seguimiento Postventa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#eceef0",
+                        "inverse-primary": "#bec6e0",
+                        "surface": "#f7f9fb",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#003ea8",
+                        "secondary-fixed": "#dbe1ff",
+                        "surface-bright": "#f7f9fb",
+                        "primary-fixed-dim": "#bec6e0",
+                        "tertiary": "#000000",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-container": "#0b1c30",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary-fixed": "#d3e4fe",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary": "#000000",
+                        "outline-variant": "#c6c6cd",
+                        "outline": "#76777d",
+                        "on-surface-variant": "#45464d",
+                        "surface-dim": "#d8dadc",
+                        "on-primary-container": "#7c839b",
+                        "error-container": "#ffdad6",
+                        "on-background": "#191c1e",
+                        "secondary": "#0051d5",
+                        "secondary-container": "#316bf3",
+                        "on-secondary-container": "#fefcff",
+                        "surface-tint": "#565e74",
+                        "on-surface": "#191c1e",
+                        "primary-container": "#131b2e",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#00174b",
+                        "inverse-surface": "#2d3133",
+                        "surface-variant": "#e0e3e5",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#75859d",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "base": "4px",
+                        "margin-desktop": "24px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "data-mono": ["JetBrains Mono"],
+                        "title-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-mono": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "title-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f7f9fb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface bg-background antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col bg-surface dark:bg-surface-dim text-primary dark:text-primary-fixed border-r border-outline-variant dark:border-outline fixed left-0 top-0 h-full w-64 z-20">
+<div class="px-6 py-8 border-b border-outline-variant dark:border-outline flex flex-col gap-2">
+<h1 class="font-headline-md text-headline-md font-black text-secondary">Tecnoinnova S.A.</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Corporate Security ERP</p>
+</div>
+<div class="px-4 py-6">
+<button class="w-full bg-secondary hover:bg-secondary-container text-on-secondary font-title-sm text-title-sm py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined">add</span>
+                Nuevo Pedido
+            </button>
+</div>
+<nav class="flex-1 overflow-y-auto py-2">
+<ul class="flex flex-col gap-1">
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl mx-2 transition-all duration-200" href="../gesti_n_de_pedidos_tecnoinnova/index.html">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-caps text-label-caps">Gestión de Pedidos</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl mx-2 transition-all duration-200" href="../asignaci_n_de_t_cnicos_tecnoinnova/index.html">
+<span class="material-symbols-outlined">engineering</span>
+<span class="font-label-caps text-label-caps">Asignación de Técnicos</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl mx-2 transition-all duration-200" href="../control_de_inventario_tecnoinnova/index.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-caps text-label-caps">Control de Inventario</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl mx-2 transition-all duration-200" href="../proceso_de_facturaci_n_tecnoinnova/index.html">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-caps text-label-caps">Proceso de Facturación</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-xl mx-2 transition-all duration-200" href="../seguimiento_postventa_tecnoinnova/index.html">
+<span class="material-symbols-outlined icon-fill">rate_review</span>
+<span class="font-label-caps text-label-caps">Seguimiento Postventa</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="mt-auto border-t border-outline-variant dark:border-outline p-4">
+<ul class="flex flex-col gap-1">
+<li class="">
+<a class="flex items-center gap-3 px-4 py-2 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Ajustes</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-2 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl transition-all duration-200" href="../index.html"><span class="material-symbols-outlined">menu</span><span class="font-label-caps text-label-caps">Volver al Menú Principal</span></a>
+</li>
+</ul>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 h-screen relative">
+<!-- TopAppBar (Mobile & Desktop overrides) -->
+<header class="bg-surface-lowest dark:bg-surface-container-highest text-primary dark:text-primary-fixed w-full border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-desktop h-16 z-10 sticky top-0 md:hidden">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-title-sm font-title-sm font-bold text-secondary dark:text-secondary-fixed">Tecnoinnova</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors cursor-pointer active:opacity-80"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors cursor-pointer active:opacity-80"><span class="material-symbols-outlined">help</span></button>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop bg-surface-container-lowest">
+<!-- Page Header -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-1">Seguimiento Postventa</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Customer satisfaction and post-installation quality tracking.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-outline text-on-surface rounded-lg font-title-sm text-title-sm hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Export Report
+                    </button>
+<button class="px-4 py-2 bg-secondary text-on-secondary rounded-lg font-title-sm text-title-sm hover:bg-secondary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">mail</span>
+                        Send Survey Batch
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- KPI: NPS Score -->
+<div class="col-span-1 md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="flex items-start justify-between mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Net Promoter Score</span>
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">78</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">+4 pts since last month</p>
+</div>
+</div>
+<!-- KPI: Satisfaction Average -->
+<div class="col-span-1 md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="flex items-start justify-between mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Avg. Satisfaction (Out of 5)</span>
+<span class="material-symbols-outlined text-secondary">star</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">4.6</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Based on 124 recent surveys</p>
+</div>
+</div>
+<!-- KPI: Pending Alerts -->
+<div class="col-span-1 md:col-span-4 bg-error-container border border-error/20 rounded-xl p-6 flex flex-col justify-between">
+<div class="flex items-start justify-between mb-4">
+<span class="font-label-caps text-label-caps text-on-error-container uppercase">Pending 1-Week Alerts</span>
+<span class="material-symbols-outlined text-error">notification_important</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-on-error-container">12</div>
+<p class="font-body-sm text-body-sm text-on-error-container mt-1">Requires immediate follow-up</p>
+</div>
+</div>
+<!-- 1-Week Installation Alerts Table -->
+<div class="col-span-1 md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h3 class="font-title-sm text-title-sm text-on-surface">Action Required: 1-Week Follow-ups</h3>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant rounded font-label-caps text-label-caps">Priority</span>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-outline-variant">
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase">Client / Order ID</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase">Install Date</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase">System Type</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold text-on-surface">Logística del Norte S.A.</div>
+<div class="text-on-surface-variant font-data-mono text-data-mono">ORD-2023-8891</div>
+</td>
+<td class="px-6 py-4">Oct 12, 2023</td>
+<td class="px-6 py-4">CCTV + Access Control</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-secondary-container font-title-sm text-title-sm">Log Call</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold text-on-surface">Farmacias Salud</div>
+<div class="text-on-surface-variant font-data-mono text-data-mono">ORD-2023-8895</div>
+</td>
+<td class="px-6 py-4">Oct 14, 2023</td>
+<td class="px-6 py-4">Motion Sensors (Branch 4)</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-secondary-container font-title-sm text-title-sm">Log Call</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold text-on-surface">Edificio Central</div>
+<div class="text-on-surface-variant font-data-mono text-data-mono">ORD-2023-8902</div>
+</td>
+<td class="px-6 py-4">Oct 15, 2023</td>
+<td class="px-6 py-4">Fire Alarm System</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-secondary-container font-title-sm text-title-sm">Log Call</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Recent Feedback Log -->
+<div class="col-span-1 md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col h-[400px]">
+<h3 class="font-title-sm text-title-sm text-on-surface mb-4">Recent Feedback Logs</h3>
+<div class="overflow-y-auto flex-1 pr-2 space-y-4">
+<!-- Log Item (Positive) -->
+<div class="p-4 rounded-lg bg-surface border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-600 text-sm">mood</span>
+<span class="font-title-sm text-title-sm text-on-surface">5/5 - Excelente</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant">Today</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">"El técnico llegó a tiempo y dejó todo funcionando perfectamente. Muy limpios."</p>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Corp. Financiera • ORD-8850</div>
+</div>
+<!-- Log Item (Complaint) -->
+<div class="p-4 rounded-lg bg-error-container/20 border border-error/30">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm">mood_bad</span>
+<span class="font-title-sm text-title-sm text-error">2/5 - Problema</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant">Yesterday</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">"Una cámara en el pasillo B pierde conexión intermitentemente desde ayer."</p>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Almacenes del Sur • ORD-8842</div>
+<button class="mt-2 text-xs font-bold text-secondary uppercase hover:underline">Create Ticket</button>
+</div>
+<!-- Log Item (Neutral) -->
+<div class="p-4 rounded-lg bg-surface border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-600 text-sm">sentiment_neutral</span>
+<span class="font-title-sm text-title-sm text-on-surface">3/5 - Regular</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant">Oct 18</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">"La instalación bien, pero el manual de usuario es difícil de entender."</p>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Boutique Bella • ORD-8821</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>

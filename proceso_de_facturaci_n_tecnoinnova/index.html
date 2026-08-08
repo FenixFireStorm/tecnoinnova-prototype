@@ -1,0 +1,434 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Proceso de Facturación - Tecnoinnova S.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#eceef0",
+                      "inverse-primary": "#bec6e0",
+                      "surface": "#f7f9fb",
+                      "secondary-fixed-dim": "#b4c5ff",
+                      "on-secondary-fixed-variant": "#003ea8",
+                      "secondary-fixed": "#dbe1ff",
+                      "surface-bright": "#f7f9fb",
+                      "primary-fixed-dim": "#bec6e0",
+                      "tertiary": "#000000",
+                      "on-primary-fixed": "#131b2e",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#0b1c30",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#38485d",
+                      "error": "#ba1a1a",
+                      "inverse-on-surface": "#eff1f3",
+                      "tertiary-container": "#0b1c30",
+                      "surface-container-low": "#f2f4f6",
+                      "tertiary-fixed": "#d3e4fe",
+                      "tertiary-fixed-dim": "#b7c8e1",
+                      "surface-container-high": "#e6e8ea",
+                      "surface-container-highest": "#e0e3e5",
+                      "primary": "#000000",
+                      "outline-variant": "#c6c6cd",
+                      "outline": "#76777d",
+                      "on-surface-variant": "#45464d",
+                      "surface-dim": "#d8dadc",
+                      "on-primary-container": "#7c839b",
+                      "error-container": "#ffdad6",
+                      "on-background": "#191c1e",
+                      "secondary": "#0051d5",
+                      "secondary-container": "#316bf3",
+                      "on-secondary-container": "#fefcff",
+                      "surface-tint": "#565e74",
+                      "on-surface": "#191c1e",
+                      "primary-container": "#131b2e",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#00174b",
+                      "inverse-surface": "#2d3133",
+                      "surface-variant": "#e0e3e5",
+                      "background": "#f7f9fb",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-container": "#75859d",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#dae2fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "xl": "32px",
+                      "md": "16px",
+                      "base": "4px",
+                      "margin-desktop": "24px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "title-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "data-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "title-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body { background-color: #F8FAFC; }
+      </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-y-auto flex h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-full py-lg bg-surface dark:bg-surface-dim text-primary dark:text-primary-fixed docked fixed left-0 top-0 w-64 border-r border-outline-variant dark:border-outline z-20">
+<div class="px-margin-desktop mb-8 flex flex-col gap-2">
+<h1 class="font-headline-md text-headline-md font-black text-secondary">Tecnoinnova S.A.</h1>
+<p class="font-title-sm text-title-sm text-on-surface-variant">ERP System</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Corporate Security</p>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full bg-secondary hover:bg-secondary-container text-on-secondary py-2 px-4 rounded flex items-center justify-center gap-2 transition-colors font-title-sm text-title-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                Nuevo Pedido
+            </button>
+</div>
+<nav class="flex-1 overflow-y-auto flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl mx-2 transition-all duration-200" href="../gesti_n_de_pedidos_tecnoinnova/index.html">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-caps text-label-caps">Gestión de Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl mx-2 transition-all duration-200" href="../asignaci_n_de_t_cnicos_tecnoinnova/index.html">
+<span class="material-symbols-outlined" data-icon="engineering">engineering</span>
+<span class="font-label-caps text-label-caps">Asignación de Técnicos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl mx-2 transition-all duration-200" href="../control_de_inventario_tecnoinnova/index.html">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-caps text-label-caps">Control de Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-xl mx-2 transition-all duration-200" href="../proceso_de_facturaci_n_tecnoinnova/index.html">
+<span class="material-symbols-outlined" data-icon="receipt_long" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-caps text-label-caps">Proceso de Facturación</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl mx-2 transition-all duration-200" href="../seguimiento_postventa_tecnoinnova/index.html">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span class="font-label-caps text-label-caps">Seguimiento Postventa</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 border-t border-outline-variant pt-4 mx-4">
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Ajustes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 rounded-xl" href="../index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps">Volver al Menú Principal</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col lg:ml-64 h-full min-h-0 relative">
+<!-- TopAppBar (Mobile/Tablet) -->
+<header class="lg:hidden flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 bg-surface-lowest dark:bg-surface-container-highest text-primary dark:text-primary-fixed docked full-width top-0 border-b border-outline-variant dark:border-outline z-10 shrink-0">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined">menu</button>
+<span class="text-title-sm font-title-sm font-bold text-secondary dark:text-secondary-fixed">Tecnoinnova S.A.</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low transition-colors rounded-full p-2" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low transition-colors rounded-full p-2" data-icon="help">help</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low transition-colors rounded-full p-2" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="A small, professional avatar headshot of an administrator for an ERP dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwg97iS79g9vsf4N4UxckEcqyrh-41gdaKyFI9IY9-DBfmNiBohLolLQaQbXshe_Ch7XUd4JPwMIYlYTdkC5ops2Fq2ENf6NsHnpPQXqiF2AnLeFFgSX5g4ATtzsDHjaC_d8-fzsV9NOisz8tGBGPD3uEMj_bI5Ezr9DOqzzoNCZErFeuuFAFyVJBIHYar_zDurMaKhAGtAwd0uNOhT3DK-KBt_Kcu7siKiKuBrRQk-2apqb1aWXN4LQ">
+</div>
+</div>
+</header>
+<!-- TopAppBar (Desktop - Simplified to avoid duplication with sidebar, mainly for actions/profile) -->
+<header class="hidden lg:flex justify-end items-center w-full px-margin-desktop h-16 bg-surface-lowest dark:bg-surface-container-highest text-primary dark:text-primary-fixed docked full-width top-0 border-b border-outline-variant dark:border-outline z-10 shrink-0">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-secondary w-64 bg-surface-container-lowest" placeholder="Buscar factura, cliente o técnico..." type="text">
+</div>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low transition-colors rounded-full p-2" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low transition-colors rounded-full p-2" data-icon="help">help</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden ml-2 cursor-pointer border border-outline-variant">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="A small, professional avatar headshot of an administrator for an ERP dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATfFjG0qf5AK9ifclLjewfYTCD2j7Npm9pp7coJm5rs4rrnV_9MkSzzamumFTDpmi5KHZhe_nAOiear6xtLskwTxRXy4bvVMJuMCmL5obHm5Qk6vilSDcPw5bizPWoZLkA0GeN1Pss15bBi4hzQs734mwnraL6UutSaIi_QDdXIFdi3QzoyRgyXECoMGtTXe5QTsAwxajH0ND8heNGEUb5-C4d2HlDoDbSYtddkNI0Y-eU3Gmvo1dToQ">
+</div>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<div class="flex-1 overflow-y-auto min-h-0 p-margin-mobile md:p-margin-desktop bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto space-y-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-1">Proceso de Facturación</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestión de reportes firmados y emisión de facturas.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface py-2 px-4 rounded border border-outline-variant font-title-sm text-title-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span> Exportar
+                        </button>
+<button class="bg-secondary hover:bg-secondary-container text-on-secondary py-2 px-4 rounded font-title-sm text-title-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_circle</span> Nueva Factura Manual
+                        </button>
+</div>
+</div>
+<!-- Bento Grid: Financial Overview -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- Metric Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute right-[-20px] top-[-20px] opacity-5 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-[120px]">payments</span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">FACTURACIÓN MENSUAL</p>
+<h3 class="font-display-lg text-display-lg text-on-surface mb-1">$45,230.00</h3>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12% vs mes anterior
+                        </p>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute right-[-20px] top-[-20px] opacity-5 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-[120px]">pending_actions</span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">POR FACTURAR (TRABAJOS COMPLETADOS)</p>
+<h3 class="font-display-lg text-display-lg text-on-surface mb-1">12 Trabajos</h3>
+<p class="font-body-sm text-body-sm text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Requiere atención
+                        </p>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute right-[-20px] top-[-20px] opacity-5 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-[120px]">account_balance</span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">ENVIADO A CONTABILIDAD</p>
+<h3 class="font-display-lg text-display-lg text-on-surface mb-1">145 Registros</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+                            Sincronizado hoy 08:00 AM
+                        </p>
+</div>
+</div>
+<!-- Main Section: Jobs Ready for Billing -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col overflow-hidden shadow-sm">
+<!-- Table Header Controls -->
+<div class="p-4 border-b border-outline-variant flex flex-col sm:flex-row justify-between items-center gap-4 bg-surface-bright">
+<h3 class="font-title-sm text-title-sm text-on-surface">Trabajos Completados (Pendientes de Facturar)</h3>
+<div class="flex gap-2">
+<select class="border border-outline-variant rounded text-body-sm px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-secondary bg-surface-container-lowest">
+<option>Todos los técnicos</option>
+<option>Carlos Mendoza</option>
+<option>Ana Torres</option>
+</select>
+<button class="p-1.5 border border-outline-variant rounded text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-2 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Orden #</th>
+<th class="py-2 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Cliente</th>
+<th class="py-2 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Técnico</th>
+<th class="py-2 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Reporte Cliente</th>
+<th class="py-2 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Monto Est.</th>
+<th class="py-2 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant hover:bg-secondary-fixed hover:bg-opacity-20 transition-colors group">
+<td class="py-3 px-4 font-data-mono text-data-mono font-bold text-on-surface">ORD-2024-890</td>
+<td class="py-3 px-4 text-on-surface font-medium">Inmobiliaria Central</td>
+<td class="py-3 px-4 text-on-surface-variant">Carlos Mendoza</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2 text-secondary cursor-pointer hover:underline">
+<span class="material-symbols-outlined text-[16px]">task</span>
+<span class="">Firmado_Digital.pdf</span>
+</div>
+</td>
+<td class="py-3 px-4 font-data-mono text-data-mono">$1,250.00</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-secondary text-on-secondary px-3 py-1 rounded hover:bg-secondary-container transition-colors font-title-sm text-title-sm shadow-sm">
+                                            Generar Factura
+                                        </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant hover:bg-secondary-fixed hover:bg-opacity-20 transition-colors group">
+<td class="py-3 px-4 font-data-mono text-data-mono font-bold text-on-surface">ORD-2024-891</td>
+<td class="py-3 px-4 text-on-surface font-medium">Logística Express S.A.</td>
+<td class="py-3 px-4 text-on-surface-variant">Ana Torres</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2 text-secondary cursor-pointer hover:underline">
+<span class="material-symbols-outlined text-[16px]">task</span>
+<span class="">Reporte_Fisico_Escaneado.pdf</span>
+</div>
+</td>
+<td class="py-3 px-4 font-data-mono text-data-mono">$3,400.00</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-secondary text-on-secondary px-3 py-1 rounded hover:bg-secondary-container transition-colors font-title-sm text-title-sm shadow-sm">
+                                            Generar Factura
+                                        </button>
+</td>
+</tr>
+<!-- Row 3 (Error State Example) -->
+<tr class="border-b border-outline-variant hover:bg-error-container hover:bg-opacity-20 transition-colors group bg-error-container bg-opacity-10">
+<td class="py-3 px-4 font-data-mono text-data-mono font-bold text-error">ORD-2024-885</td>
+<td class="py-3 px-4 text-on-surface font-medium">Boutique Los Andes</td>
+<td class="py-3 px-4 text-on-surface-variant">Roberto Díaz</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2 text-error cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span class="italic text-xs">Falta Firma Cliente</span>
+</div>
+</td>
+<td class="py-3 px-4 font-data-mono text-data-mono">$850.00</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded cursor-not-allowed font-title-sm text-title-sm border border-outline-variant opacity-50" disabled="">
+                                            Generar Factura
+                                        </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Secondary Section: Sent/Archived Invoices -->
+<div class="mt-8">
+<h3 class="font-title-sm text-title-sm text-on-surface mb-4">Facturas Emitidas Recientemente</h3>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<!-- Invoice Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex justify-between items-center hover:border-secondary transition-colors cursor-default shadow-sm">
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-high p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">receipt</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-data-mono text-data-mono font-bold">FAC-00451</h4>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase">Enviada por Correo</span>
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">cloud_done</span> Archivo Digital</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Colegio San Martín - Instalación CCTV</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-data-mono font-bold">$4,500.00</p>
+<p class="text-xs text-on-surface-variant mt-1 flex items-center justify-end gap-1"><span class="material-symbols-outlined text-[12px] text-green-600">check_circle</span> Conta OK</p>
+</div>
+</div>
+<!-- Invoice Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex justify-between items-center hover:border-secondary transition-colors cursor-default shadow-sm">
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-high p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">receipt</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-data-mono text-data-mono font-bold">FAC-00450</h4>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase">Enviada por Correo</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Farmacias Estrella - Sensores Movimiento</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-data-mono font-bold">$920.00</p>
+<p class="text-xs text-on-surface-variant mt-1 flex items-center justify-end gap-1"><span class="material-symbols-outlined text-[12px] text-green-600">check_circle</span> Conta OK</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>
