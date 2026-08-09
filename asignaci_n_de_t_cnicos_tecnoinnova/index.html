@@ -191,8 +191,8 @@
 </div>
 
 <script>
-const SUPABASE_URL = "https://tu-proyecto.supabase.co";
-const SUPABASE_ANON_KEY = "tu-anon-key-de-supabase";
+const SUPABASE_URL = "https://qcwwsdzmurvgyxhtrmfa.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjd3dzZHptdXJ2Z3l4aHRybWZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyMzgxMTAsImV4cCI6MjEwMTgxNDExMH0.pVl016YwNbfzJCkQRy9kIrfPsYmiPHLIJMK2W2i2-gc";
 const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 let techOrders = JSON.parse(localStorage.getItem('tecno_assign_orders')) || [
@@ -210,6 +210,21 @@ let techs = JSON.parse(localStorage.getItem('tecno_techs')) || [
 ];
 
 let selectedOrderId = null;
+
+async function loadFromSupabase() {
+  if (supabaseClient) {
+    try {
+      const { data, error } = await supabaseClient.from('tech_orders').select('*');
+      if (!error && data && data.length > 0) {
+        techOrders = data;
+        localStorage.setItem('tecno_assign_orders', JSON.stringify(techOrders));
+      }
+    } catch (e) {
+      console.log('Cargando desde almacenamiento local');
+    }
+  }
+  renderApp();
+}
 
 function renderApp() {
   localStorage.setItem('tecno_assign_orders', JSON.stringify(techOrders));
@@ -270,11 +285,19 @@ function selectOrder(id) {
   renderApp();
 }
 
-function assignTech(techName) {
+async function assignTech(techName) {
   if (!selectedOrderId) return;
   techOrders = techOrders.map(o => o.id === selectedOrderId ? { ...o, assignedTo: techName } : o);
   renderApp();
   selectOrder(selectedOrderId);
+
+  if (supabaseClient) {
+    try {
+      await supabaseClient.from('tech_orders').update({ assignedTo: techName }).eq('id', selectedOrderId);
+    } catch (err) {
+      console.log('Error asignando en Supabase:', err);
+    }
+  }
 }
 
 function openInstallModal() { document.getElementById('installModal').classList.remove('hidden'); document.getElementById('installModal').classList.add('flex'); }
@@ -304,7 +327,7 @@ async function saveInstallOrder(e) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', renderApp);
+document.addEventListener('DOMContentLoaded', loadFromSupabase);
 </script>
 </body>
 </html>

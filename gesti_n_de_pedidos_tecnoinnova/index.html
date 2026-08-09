@@ -244,8 +244,8 @@
 </div>
 
 <script>
-const SUPABASE_URL = "https://tu-proyecto.supabase.co";
-const SUPABASE_ANON_KEY = "tu-anon-key-de-supabase";
+const SUPABASE_URL = "https://qcwwsdzmurvgyxhtrmfa.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjd3dzZHptdXJ2Z3l4aHRybWZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyMzgxMTAsImV4cCI6MjEwMTgxNDExMH0.pVl016YwNbfzJCkQRy9kIrfPsYmiPHLIJMK2W2i2-gc";
 const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 let orders = JSON.parse(localStorage.getItem('tecno_orders')) || [
@@ -254,6 +254,21 @@ let orders = JSON.parse(localStorage.getItem('tecno_orders')) || [
   { id: '#ORD-2023-087', client: 'Farmacias Vida', location: 'Cuenca, Centro Histórico', service: 'Sistema de Alarmas Integral', date: 'Ayer, 14:20', status: 'Pendiente' },
   { id: '#ORD-2023-086', client: 'Constructora Edfic', location: 'Manta, Proyecto Costanera', service: 'CCTV y Control de Acceso', date: 'Ayer, 10:15', status: 'Rechazado' }
 ];
+
+async function loadFromSupabase() {
+  if (supabaseClient) {
+    try {
+      const { data, error } = await supabaseClient.from('orders').select('*');
+      if (!error && data && data.length > 0) {
+        orders = data;
+        localStorage.setItem('tecno_orders', JSON.stringify(orders));
+      }
+    } catch (e) {
+      console.log('Cargando desde almacenamiento local');
+    }
+  }
+  renderTable();
+}
 
 function saveToStorage() {
   localStorage.setItem('tecno_orders', JSON.stringify(orders));
@@ -301,9 +316,17 @@ function renderTable() {
   `).join('');
 }
 
-function changeStatus(id, newStatus) {
+async function changeStatus(id, newStatus) {
   orders = orders.map(o => o.id === id ? { ...o, status: newStatus } : o);
   saveToStorage();
+
+  if (supabaseClient) {
+    try {
+      await supabaseClient.from('orders').update({ status: newStatus }).eq('id', id);
+    } catch (err) {
+      console.log('Error actualizando en Supabase:', err);
+    }
+  }
 }
 
 function openModal() { document.getElementById('orderModal').classList.remove('hidden'); document.getElementById('orderModal').classList.add('flex'); }
@@ -334,7 +357,7 @@ async function saveOrder(e) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', renderTable);
+document.addEventListener('DOMContentLoaded', loadFromSupabase);
 </script>
 </body>
 </html>

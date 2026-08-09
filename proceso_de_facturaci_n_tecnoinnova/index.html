@@ -161,15 +161,30 @@
 </div>
 
 <script>
-const SUPABASE_URL = "https://tu-proyecto.supabase.co";
-const SUPABASE_ANON_KEY = "tu-anon-key-de-supabase";
+const SUPABASE_URL = "https://qcwwsdzmurvgyxhtrmfa.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjd3dzZHptdXJ2Z3l4aHRybWZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyMzgxMTAsImV4cCI6MjEwMTgxNDExMH0.pVl016YwNbfzJCkQRy9kIrfPsYmiPHLIJMK2W2i2-gc";
 const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 let bills = JSON.parse(localStorage.getItem('tecno_bills')) || [
-  { order: 'ORD-2024-890', client: 'Inmobiliaria Central', tech: 'Carlos Mendoza', amount: 1250.00, status: 'Pendiente' },
-  { order: 'ORD-2024-891', client: 'Logística Express S.A.', tech: 'Ana Torres', amount: 3400.00, status: 'Facturado' },
-  { order: 'ORD-2024-885', client: 'Boutique Los Andes', tech: 'Roberto Díaz', amount: 850.00, status: 'Pendiente' }
+  { order_num: 'ORD-2024-890', client: 'Inmobiliaria Central', tech: 'Carlos Mendoza', amount: 1250.00, status: 'Pendiente' },
+  { order_num: 'ORD-2024-891', client: 'Logística Express S.A.', tech: 'Ana Torres', amount: 3400.00, status: 'Facturado' },
+  { order_num: 'ORD-2024-885', client: 'Boutique Los Andes', tech: 'Roberto Díaz', amount: 850.00, status: 'Pendiente' }
 ];
+
+async function loadFromSupabase() {
+  if (supabaseClient) {
+    try {
+      const { data, error } = await supabaseClient.from('bills').select('*');
+      if (!error && data && data.length > 0) {
+        bills = data;
+        localStorage.setItem('tecno_bills', JSON.stringify(bills));
+      }
+    } catch (e) {
+      console.log('Cargando desde almacenamiento local');
+    }
+  }
+  renderBilling();
+}
 
 function renderBilling() {
   localStorage.setItem('tecno_bills', JSON.stringify(bills));
@@ -180,12 +195,12 @@ function renderBilling() {
   document.getElementById('statPendingBillingCount').innerText = `${bills.filter(b => b.status === 'Pendiente').length} Trabajos`;
   document.getElementById('statBilledCount').innerText = `${bills.filter(b => b.status === 'Facturado').length} Registros`;
 
-  const filtered = bills.filter(b => b.order.toLowerCase().includes(search) || b.client.toLowerCase().includes(search));
+  const filtered = bills.filter(b => (b.order_num || b.order || '').toLowerCase().includes(search) || b.client.toLowerCase().includes(search));
 
   const tbody = document.getElementById('billingTableBody');
   tbody.innerHTML = filtered.map(b => `
     <tr class="hover:bg-slate-50">
-      <td class="py-3 px-4 font-bold font-data-mono">${b.order}</td>
+      <td class="py-3 px-4 font-bold font-data-mono">${b.order_num || b.order}</td>
       <td class="py-3 px-4 font-medium">${b.client}</td>
       <td class="py-3 px-4 text-slate-600">${b.tech}</td>
       <td class="py-3 px-4">
@@ -194,16 +209,24 @@ function renderBilling() {
       <td class="py-3 px-4 font-data-mono">$${Number(b.amount).toFixed(2)}</td>
       <td class="py-3 px-4 text-right">
         ${b.status === 'Pendiente' ? `
-          <button onclick="generateInvoice('${b.order}')" class="bg-secondary text-white px-3 py-1 rounded text-xs">Generar Factura</button>
+          <button onclick="generateInvoice('${b.order_num || b.order}')" class="bg-secondary text-white px-3 py-1 rounded text-xs">Generar Factura</button>
         ` : `<span class="text-xs text-slate-400">Procesado</span>`}
       </td>
     </tr>
   `).join('');
 }
 
-function generateInvoice(orderNum) {
-  bills = bills.map(b => b.order === orderNum ? { ...b, status: 'Facturado' } : b);
+async function generateInvoice(orderNum) {
+  bills = bills.map(b => (b.order_num === orderNum || b.order === orderNum) ? { ...b, status: 'Facturado' } : b);
   renderBilling();
+
+  if (supabaseClient) {
+    try {
+      await supabaseClient.from('bills').update({ status: 'Facturado' }).eq('order_num', orderNum);
+    } catch (err) {
+      console.log('Error actualizando factura en Supabase:', err);
+    }
+  }
 }
 
 function openBillModal() { document.getElementById('billModal').classList.remove('hidden'); document.getElementById('billModal').classList.add('flex'); }
@@ -212,7 +235,7 @@ function closeBillModal() { document.getElementById('billModal').classList.add('
 async function saveNewBill(e) {
   e.preventDefault();
   const newBill = {
-    order: document.getElementById('billOrderInput').value,
+    order_num: document.getElementById('billOrderInput').value,
     client: document.getElementById('billClientInput').value,
     tech: document.getElementById('billTechInput').value,
     amount: Number(document.getElementById('billAmountInput').value),
@@ -232,7 +255,7 @@ async function saveNewBill(e) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', renderBilling);
+document.addEventListener('DOMContentLoaded', loadFromSupabase);
 </script>
 </body>
 </html>
