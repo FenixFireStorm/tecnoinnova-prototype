@@ -6,8 +6,8 @@
 <title>Asignación de Técnicos - Tecnoinnova S.A.</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <script id="tailwind-config">
         tailwind.config = {
           darkMode: "class",
@@ -73,14 +73,9 @@
 </head>
 <body class="bg-background text-on-surface flex h-screen overflow-hidden">
 <aside class="hidden md:flex flex-col h-full py-lg bg-surface border-r border-outline-variant docked fixed left-0 top-0 w-64 z-20">
-<div class="px-margin-desktop mb-6">
+<div class="px-margin-desktop mb-8">
 <h1 class="font-headline-md text-headline-md font-black text-secondary">Tecnoinnova S.A.</h1>
 <p class="font-body-sm text-body-sm text-on-surface-variant">Corporate Security ERP</p>
-</div>
-<div class="px-4 mb-4">
-  <button onclick="openInstallationModal()" class="w-full bg-secondary text-on-secondary py-2.5 px-3 rounded-lg font-title-sm text-sm flex items-center justify-center gap-2 hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm">
-    <span class="material-symbols-outlined text-sm">add</span> Nueva Orden Instalación
-  </button>
 </div>
 <nav class="flex-1 overflow-y-auto space-y-1">
 <a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 transition-all duration-200" href="../gesti_n_de_pedidos_tecnoinnova/index.html">
@@ -100,7 +95,7 @@
 </a>
 </nav>
 <div class="mt-auto px-4 space-y-1 border-t border-outline-variant pt-4">
-<a class="flex items-center gap-3 px-4 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2" href="../index.html"><span class="material-symbols-outlined">home</span><span class="font-title-sm text-title-sm">Menú Principal</span></a>
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2" href="../index.html"><span class="material-symbols-outlined">home</span><span class="font-title-sm text-title-sm">Volver al Menú Principal</span></a>
 </div>
 </aside>
 
@@ -117,6 +112,10 @@
 <h2 class="font-display-lg text-display-lg text-primary">Asignación de Técnicos</h2>
 <p class="font-body-md text-body-md text-on-surface-variant mt-1">Gestione la agenda y asigne órdenes de instalación por zona.</p>
 </div>
+<div class="flex items-center gap-3">
+<button onclick="openInstallModal()" class="px-4 py-2 bg-secondary text-on-secondary rounded-lg font-title-sm text-title-sm flex items-center gap-2 shadow-sm hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-sm">add</span> Nueva Orden de Instalación
+</button>
 <select id="zoneFilter" onchange="renderApp()" class="bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-md text-body-md">
 <option value="ALL">Todas las Zonas</option>
 <option value="Zona Norte">Zona Norte</option>
@@ -124,6 +123,7 @@
 <option value="Zona Este">Zona Este</option>
 <option value="Zona Oeste">Zona Oeste</option>
 </select>
+</div>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-200px)] min-h-[600px]">
@@ -165,47 +165,35 @@
 </div>
 </main>
 
-<!-- Modal Nueva Orden de Instalación -->
-<div id="installationModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-  <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-lg space-y-4">
-    <h3 class="text-title-sm font-bold text-primary">Nueva Orden de Instalación</h3>
-    <form id="installationForm" onsubmit="saveInstallationOrder(event)" class="space-y-3">
-      <div>
-        <label class="block text-xs font-bold text-on-surface-variant">Título / Descripción</label>
-        <input id="instTitleInput" required placeholder="Ej: Instalación CCTV (4 cámaras)" class="w-full border border-outline-variant rounded p-2 text-sm" type="text">
-      </div>
-      <div>
-        <label class="block text-xs font-bold text-on-surface-variant">Zona</label>
-        <select id="instZoneInput" class="w-full border border-outline-variant rounded p-2 text-sm">
-          <option value="Zona Norte">Zona Norte</option>
-          <option value="Zona Sur">Zona Sur</option>
-          <option value="Zona Este">Zona Este</option>
-          <option value="Zona Oeste">Zona Oeste</option>
-        </select>
-      </div>
-      <div>
-        <label class="block text-xs font-bold text-on-surface-variant">Tiempo Estimado</label>
-        <input id="instTimeInput" required placeholder="Ej: 3 horas" class="w-full border border-outline-variant rounded p-2 text-sm" type="text">
-      </div>
-      <div>
-        <label class="block text-xs font-bold text-on-surface-variant">Prioridad</label>
-        <select id="instPriorityInput" class="w-full border border-outline-variant rounded p-2 text-sm">
-          <option value="Alta Prio">Alta Prioridad</option>
-          <option value="Normal">Normal</option>
-        </select>
-      </div>
-      <div class="flex justify-end gap-2 pt-2">
-        <button type="button" onclick="closeInstallationModal()" class="px-4 py-2 border rounded text-sm">Cancelar</button>
-        <button type="submit" class="px-4 py-2 bg-secondary text-white rounded text-sm">Crear Orden</button>
-      </div>
-    </form>
-  </div>
+<div id="installModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+<div class="bg-white p-6 rounded-xl w-full max-w-md space-y-3">
+<h3 class="text-title-sm font-bold text-primary">Agregar Nueva Orden de Instalación</h3>
+<form onsubmit="saveInstallOrder(event)" class="space-y-3">
+<input id="instTitleInput" required placeholder="Descripción / Título de Instalación" class="w-full border p-2 rounded text-sm border-outline-variant">
+<select id="instZoneInput" class="w-full border p-2 rounded text-sm border-outline-variant">
+<option value="Zona Norte">Zona Norte</option>
+<option value="Zona Sur">Zona Sur</option>
+<option value="Zona Este">Zona Este</option>
+<option value="Zona Oeste">Zona Oeste</option>
+</select>
+<input id="instTimeInput" required placeholder="Tiempo estimado (ej: 3 horas)" class="w-full border p-2 rounded text-sm border-outline-variant">
+<select id="instPriorityInput" class="w-full border p-2 rounded text-sm border-outline-variant">
+<option value="Normal">Normal</option>
+<option value="Alta Prio">Alta Prio</option>
+<option value="Urgente">Urgente</option>
+</select>
+<div class="flex justify-end gap-2 pt-2">
+<button type="button" onclick="closeInstallModal()" class="px-4 py-2 border rounded text-sm">Cancelar</button>
+<button type="submit" class="px-4 py-2 bg-secondary text-white rounded text-sm">Guardar Orden</button>
+</div>
+</form>
+</div>
 </div>
 
 <script>
-const SUPABASE_URL = window.ENV_SUPABASE_URL || 'https://tu-proyecto.supabase.co';
-const SUPABASE_ANON_KEY = window.ENV_SUPABASE_ANON_KEY || 'tu-anon-key';
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const SUPABASE_URL = "https://tu-proyecto.supabase.co";
+const SUPABASE_ANON_KEY = "tu-anon-key-de-supabase";
+const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 let techOrders = JSON.parse(localStorage.getItem('tecno_assign_orders')) || [
   { id: 'ORD-2023-089', title: 'Instalación CCTV (4 cámaras)', zone: 'Zona Norte', time: '4 horas', priority: 'Alta Prio', assignedTo: null },
@@ -282,24 +270,19 @@ function selectOrder(id) {
   renderApp();
 }
 
-async function assignTech(techName) {
+function assignTech(techName) {
   if (!selectedOrderId) return;
   techOrders = techOrders.map(o => o.id === selectedOrderId ? { ...o, assignedTo: techName } : o);
-  
-  // Actualizar Supabase
-  try {
-    await supabaseClient.from('ordenes_instalacion').update({ assignedTo: techName }).eq('id', selectedOrderId);
-  } catch (err) { console.error('Error actualizando Supabase:', err); }
-
+  renderApp();
   selectOrder(selectedOrderId);
 }
 
-function openInstallationModal() { document.getElementById('installationModal').classList.remove('hidden'); document.getElementById('installationModal').classList.add('flex'); }
-function closeInstallationModal() { document.getElementById('installationModal').classList.add('hidden'); document.getElementById('installationModal').classList.remove('flex'); }
+function openInstallModal() { document.getElementById('installModal').classList.remove('hidden'); document.getElementById('installModal').classList.add('flex'); }
+function closeInstallModal() { document.getElementById('installModal').classList.add('hidden'); document.getElementById('installModal').classList.remove('flex'); }
 
-async function saveInstallationOrder(e) {
+async function saveInstallOrder(e) {
   e.preventDefault();
-  const newInstOrder = {
+  const newOrder = {
     id: `ORD-2023-${Math.floor(100 + Math.random() * 900)}`,
     title: document.getElementById('instTitleInput').value,
     zone: document.getElementById('instZoneInput').value,
@@ -307,17 +290,18 @@ async function saveInstallationOrder(e) {
     priority: document.getElementById('instPriorityInput').value,
     assignedTo: null
   };
-
-  techOrders.unshift(newInstOrder);
+  
+  techOrders.unshift(newOrder);
   renderApp();
+  closeInstallModal();
 
-  // Guardado en Supabase
-  try {
-    await supabaseClient.from('ordenes_instalacion').insert([newInstOrder]);
-  } catch (err) { console.error('Error enviando a Supabase:', err); }
-
-  closeInstallationModal();
-  document.getElementById('installationForm').reset();
+  if (supabaseClient) {
+    try {
+      await supabaseClient.from('tech_orders').insert([newOrder]);
+    } catch (err) {
+      console.log('Guardado localmente. Configure Supabase para sincronizar.');
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', renderApp);
