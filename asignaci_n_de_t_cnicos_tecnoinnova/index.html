@@ -1,11 +1,13 @@
-<!DOCTYPE html><html lang="es"><head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Asignación de Técnicos - Tecnoinnova S.A.</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <script id="tailwind-config">
         tailwind.config = {
           darkMode: "class",
@@ -60,418 +62,265 @@
                       "surface-container-lowest": "#ffffff",
                       "primary-fixed": "#dae2fd"
               },
-              "borderRadius": {
-                      "DEFAULT": "0.125rem",
-                      "lg": "0.25rem",
-                      "xl": "0.5rem",
-                      "full": "0.75rem"
-              },
-              "spacing": {
-                      "gutter": "16px",
-                      "xl": "32px",
-                      "md": "16px",
-                      "base": "4px",
-                      "margin-desktop": "24px",
-                      "lg": "24px",
-                      "sm": "8px",
-                      "xs": "4px",
-                      "margin-mobile": "16px"
-              },
-              "fontFamily": {
-                      "data-mono": [
-                              "JetBrains Mono"
-                      ],
-                      "title-sm": [
-                              "Hanken Grotesk"
-                      ],
-                      "headline-md": [
-                              "Hanken Grotesk"
-                      ],
-                      "display-lg": [
-                              "Hanken Grotesk"
-                      ],
-                      "body-md": [
-                              "Hanken Grotesk"
-                      ],
-                      "body-sm": [
-                              "Hanken Grotesk"
-                      ],
-                      "label-caps": [
-                              "Hanken Grotesk"
-                      ]
-              },
-              "fontSize": {
-                      "data-mono": [
-                              "12px",
-                              {
-                                      "lineHeight": "16px",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "title-sm": [
-                              "18px",
-                              {
-                                      "lineHeight": "24px",
-                                      "fontWeight": "600"
-                              }
-                      ],
-                      "headline-md": [
-                              "24px",
-                              {
-                                      "lineHeight": "32px",
-                                      "fontWeight": "600"
-                              }
-                      ],
-                      "display-lg": [
-                              "32px",
-                              {
-                                      "lineHeight": "40px",
-                                      "letterSpacing": "-0.02em",
-                                      "fontWeight": "700"
-                              }
-                      ],
-                      "body-md": [
-                              "14px",
-                              {
-                                      "lineHeight": "20px",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "body-sm": [
-                              "13px",
-                              {
-                                      "lineHeight": "18px",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "label-caps": [
-                              "11px",
-                              {
-                                      "lineHeight": "16px",
-                                      "letterSpacing": "0.05em",
-                                      "fontWeight": "700"
-                              }
-                      ]
-              }
-      },
-          },
+              "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+              "spacing": { "gutter": "16px", "xl": "32px", "md": "16px", "base": "4px", "margin-desktop": "24px", "lg": "24px", "sm": "8px", "xs": "4px", "margin-mobile": "16px" },
+              "fontFamily": { "data-mono": ["JetBrains Mono"], "title-sm": ["Hanken Grotesk"], "headline-md": ["Hanken Grotesk"], "display-lg": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"], "body-sm": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"] }
+            }
+          }
         }
       </script>
-<style>
-        body { font-family: 'Hanken Grotesk', sans-serif; }
-      </style>
+<style> body { font-family: 'Hanken Grotesk', sans-serif; } </style>
 </head>
 <body class="bg-background text-on-surface flex h-screen overflow-hidden">
-<!-- SideNavBar -->
 <aside class="hidden md:flex flex-col h-full py-lg bg-surface border-r border-outline-variant docked fixed left-0 top-0 w-64 z-20">
-<div class="px-margin-desktop mb-8">
+<div class="px-margin-desktop mb-6">
 <h1 class="font-headline-md text-headline-md font-black text-secondary">Tecnoinnova S.A.</h1>
 <p class="font-body-sm text-body-sm text-on-surface-variant">Corporate Security ERP</p>
 </div>
-<div class="px-4 mb-6">
-<button class="w-full bg-secondary text-on-secondary font-title-sm text-title-sm rounded-lg py-2 px-4 hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm flex items-center justify-center gap-2">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
-                Nuevo Pedido
-            </button>
+<div class="px-4 mb-4">
+  <button onclick="openInstallationModal()" class="w-full bg-secondary text-on-secondary py-2.5 px-3 rounded-lg font-title-sm text-sm flex items-center justify-center gap-2 hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm">
+    <span class="material-symbols-outlined text-sm">add</span> Nueva Orden Instalación
+  </button>
 </div>
 <nav class="flex-1 overflow-y-auto space-y-1">
 <a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 transition-all duration-200" href="../gesti_n_de_pedidos_tecnoinnova/index.html">
-<span class="material-symbols-outlined">shopping_cart</span>
-<span class="font-title-sm text-title-sm">Gestión de Pedidos</span>
+<span class="material-symbols-outlined">shopping_cart</span><span class="font-title-sm text-title-sm">Gestión de Pedidos</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 cursor-pointer group bg-secondary-container text-on-secondary-container rounded-xl mx-2 transition-all duration-200" href="../asignaci_n_de_t_cnicos_tecnoinnova/index.html">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">engineering</span>
-<span class="font-title-sm text-title-sm">Asignación de Técnicos</span>
+<span class="material-symbols-outlined">engineering</span><span class="font-title-sm text-title-sm">Asignación de Técnicos</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 transition-all duration-200" href="../control_de_inventario_tecnoinnova/index.html">
-<span class="material-symbols-outlined">inventory_2</span>
-<span class="font-title-sm text-title-sm">Control de Inventario</span>
+<span class="material-symbols-outlined">inventory_2</span><span class="font-title-sm text-title-sm">Control de Inventario</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 transition-all duration-200" href="../proceso_de_facturaci_n_tecnoinnova/index.html">
-<span class="material-symbols-outlined">receipt_long</span>
-<span class="font-title-sm text-title-sm">Proceso de Facturación</span>
+<span class="material-symbols-outlined">receipt_long</span><span class="font-title-sm text-title-sm">Proceso de Facturación</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 transition-all duration-200" href="../seguimiento_postventa_tecnoinnova/index.html">
-<span class="material-symbols-outlined">rate_review</span>
-<span class="font-title-sm text-title-sm">Seguimiento Postventa</span>
+<span class="material-symbols-outlined">rate_review</span><span class="font-title-sm text-title-sm">Seguimiento Postventa</span>
 </a>
 </nav>
 <div class="mt-auto px-4 space-y-1 border-t border-outline-variant pt-4">
-<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 transition-all duration-200" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-title-sm text-title-sm">Ajustes</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 cursor-pointer group text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2 transition-all duration-200" href="../index.html"><span class="material-symbols-outlined">home</span><span class="font-title-sm text-title-sm">Volver al Menú Principal</span></a>
+<a class="flex items-center gap-3 px-4 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high rounded-xl mx-2" href="../index.html"><span class="material-symbols-outlined">home</span><span class="font-title-sm text-title-sm">Menú Principal</span></a>
 </div>
 </aside>
-<!-- Main Content Area -->
+
 <main class="flex-1 md:ml-64 flex flex-col h-screen overflow-hidden bg-background">
-<!-- TopAppBar (Mobile & Utility) -->
 <header class="bg-surface-lowest flex justify-between items-center w-full px-margin-desktop h-16 border-b border-outline-variant z-10 shrink-0">
-<div class="flex items-center md:hidden">
-<button class="text-on-surface-variant p-2 -ml-2">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<span class="text-title-sm font-title-sm font-bold text-secondary ml-2">Tecnoinnova S.A.</span>
-</div>
-<!-- Search & Actions (Desktop focus) -->
 <div class="hidden md:flex items-center gap-4 w-full justify-between">
-<div class="relative w-96">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full bg-surface-container-low border border-outline-variant rounded-full py-2 pl-10 pr-4 font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent" placeholder="Buscar orden, técnico o zona..." type="text">
-</div>
-<div class="flex items-center gap-2">
-<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined">help</span>
-</button>
-<div class="w-8 h-8 rounded-full bg-primary-fixed ml-2 overflow-hidden border border-outline-variant flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-fixed">person</span>
-</div>
-</div>
+<input id="techSearch" oninput="renderApp()" class="w-96 bg-surface-container-low border border-outline-variant rounded-full py-2 px-4 font-body-md text-body-md" placeholder="Buscar orden o técnico..." type="text">
 </div>
 </header>
-<!-- Page Content -->
+
 <div class="flex-1 overflow-auto p-margin-desktop space-y-6">
-<!-- Page Header -->
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 <div>
 <h2 class="font-display-lg text-display-lg text-primary">Asignación de Técnicos</h2>
 <p class="font-body-md text-body-md text-on-surface-variant mt-1">Gestione la agenda y asigne órdenes de instalación por zona.</p>
 </div>
-<div class="flex items-center gap-3">
-<select class="bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent outline-none">
-<option value="all">Todas las Zonas</option>
-<option value="norte">Zona Norte</option>
-<option value="sur">Zona Sur</option>
-<option value="este">Zona Este</option>
-<option value="oeste">Zona Oeste</option>
+<select id="zoneFilter" onchange="renderApp()" class="bg-surface border border-outline-variant rounded-md py-2 px-3 font-body-md text-body-md">
+<option value="ALL">Todas las Zonas</option>
+<option value="Zona Norte">Zona Norte</option>
+<option value="Zona Sur">Zona Sur</option>
+<option value="Zona Este">Zona Este</option>
+<option value="Zona Oeste">Zona Oeste</option>
 </select>
-<div class="flex bg-surface-container-low rounded-lg p-1 border border-outline-variant">
-<button class="px-3 py-1.5 rounded-md bg-surface shadow-sm font-title-sm text-title-sm text-primary flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">map</span> Mapa
-                        </button>
-<button class="px-3 py-1.5 rounded-md text-on-surface-variant font-title-sm text-title-sm hover:text-primary flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">calendar_view_week</span> Agenda
-                        </button>
 </div>
-</div>
-</div>
-<!-- Main Layout Grid -->
+
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-200px)] min-h-[600px]">
-<!-- Left Column: Orders & Filters (4 cols) -->
 <div class="lg:col-span-4 flex flex-col gap-4">
-<!-- KPI Cards Row -->
 <div class="grid grid-cols-2 gap-4">
 <div class="bg-surface p-4 rounded-xl border border-outline-variant">
 <p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Pendientes</p>
-<p class="font-display-lg text-display-lg text-primary mt-1">12</p>
+<p id="pendingCount" class="font-display-lg text-display-lg text-primary mt-1">0</p>
 </div>
 <div class="bg-surface p-4 rounded-xl border border-outline-variant">
 <p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Técnicos Activos</p>
-<p class="font-display-lg text-display-lg text-primary mt-1">8/10</p>
+<p id="activeTechsCount" class="font-display-lg text-display-lg text-primary mt-1">0</p>
 </div>
 </div>
-<!-- Pending Orders List -->
+
 <div class="bg-surface border border-outline-variant rounded-xl flex-1 flex flex-col overflow-hidden">
-<div class="bg-surface-container-low p-3 border-b border-outline-variant flex justify-between items-center">
+<div class="bg-surface-container-low p-3 border-b border-outline-variant">
 <h3 class="font-title-sm text-title-sm text-primary">Órdenes Pendientes</h3>
-<button class="text-secondary hover:text-secondary-container p-1 rounded">
-<span class="material-symbols-outlined text-sm">filter_list</span>
-</button>
 </div>
-<div class="flex-1 overflow-y-auto p-2 space-y-2">
-<!-- Order Item 1 -->
-<div class="p-3 border border-outline-variant rounded-lg hover:border-secondary hover:bg-secondary-fixed cursor-pointer transition-colors group">
-<div class="flex justify-between items-start mb-2">
-<span class="font-data-mono text-data-mono bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">ORD-2023-089</span>
-<span class="bg-error-container text-on-error-container font-label-caps text-label-caps px-2 py-0.5 rounded-full uppercase">Alta Prio</span>
-</div>
-<h4 class="font-title-sm text-title-sm text-primary mb-1">Instalación CCTV (4 cámaras)</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">location_on</span> Zona Norte - Centro Comercial
-                                </p>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-<span class="material-symbols-outlined text-[14px]">schedule</span> Est. 4 horas
-                                </p>
-</div>
-<!-- Order Item 2 -->
-<div class="p-3 border border-outline-variant rounded-lg hover:border-secondary hover:bg-secondary-fixed cursor-pointer transition-colors">
-<div class="flex justify-between items-start mb-2">
-<span class="font-data-mono text-data-mono bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">ORD-2023-090</span>
-</div>
-<h4 class="font-title-sm text-title-sm text-primary mb-1">Sistema de Alarma Básico</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">location_on</span> Zona Sur - Residencia Familia Pérez
-                                </p>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-<span class="material-symbols-outlined text-[14px]">schedule</span> Est. 2 horas
-                                </p>
-</div>
-<!-- Order Item 3 -->
-<div class="p-3 border border-outline-variant rounded-lg hover:border-secondary hover:bg-secondary-fixed cursor-pointer transition-colors">
-<div class="flex justify-between items-start mb-2">
-<span class="font-data-mono text-data-mono bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">ORD-2023-091</span>
-</div>
-<h4 class="font-title-sm text-title-sm text-primary mb-1">Control de Acceso Biométrico</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">location_on</span> Zona Este - Oficinas Corp.
-                                </p>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-<span class="material-symbols-outlined text-[14px]">schedule</span> Est. 3 horas
-                                </p>
-</div>
-<!-- Order Item 4 -->
-<div class="p-3 border border-outline-variant rounded-lg hover:border-secondary hover:bg-secondary-fixed cursor-pointer transition-colors">
-<div class="flex justify-between items-start mb-2">
-<span class="font-data-mono text-data-mono bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">ORD-2023-092</span>
-</div>
-<h4 class="font-title-sm text-title-sm text-primary mb-1">Mantenimiento Preventivo</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">location_on</span> Zona Oeste - Banco Nacional
-                                </p>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-<span class="material-symbols-outlined text-[14px]">schedule</span> Est. 1.5 horas
-                                </p>
+<div id="techOrdersList" class="flex-1 overflow-y-auto p-2 space-y-2"></div>
 </div>
 </div>
-</div>
-</div>
-<!-- Right Column: Map & Techs (8 cols) -->
+
 <div class="lg:col-span-8 flex flex-col gap-4">
-<!-- Map View -->
-<div class="bg-surface border border-outline-variant rounded-xl flex-1 relative overflow-hidden group">
-<!-- Placeholder Map Image -->
-<div class="absolute inset-0 bg-surface-container-highest flex items-center justify-center" data-alt="A detailed, clean, top-down map interface showing city blocks in a light mode corporate modern aesthetic. The map uses subtle grays and blues, with several distinct markers indicating technician locations and pending installation zones. The lighting is flat and functional." data-location="Ciudad Capital, Zona Metropolitana" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-size: cover; background-position: center;">
-<!-- Map Overlays (Simulated Pins) -->
-<div class="absolute top-1/4 left-1/3 flex flex-col items-center">
-<div class="bg-secondary text-on-secondary p-1 rounded-full shadow-md">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">person_pin_circle</span>
-</div>
-<span class="bg-surface px-2 py-0.5 mt-1 rounded text-xs font-bold shadow-sm border border-outline-variant">Téc. Silva</span>
-</div>
-<div class="absolute top-1/2 right-1/4 flex flex-col items-center">
-<div class="bg-error text-on-error p-1 rounded-full shadow-md animate-pulse">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
-</div>
-<span class="bg-surface px-2 py-0.5 mt-1 rounded text-xs font-bold shadow-sm border border-outline-variant">ORD-089</span>
+<div id="mapArea" class="bg-surface border border-outline-variant rounded-xl flex-1 relative overflow-hidden flex items-center justify-center bg-slate-200">
+<div id="selectedOrderInfo" class="text-center p-4 bg-white/90 rounded-lg shadow border">
+<p class="font-bold text-lg text-secondary">Seleccione una orden para ver en el mapa y asignar</p>
 </div>
 </div>
-<!-- Floating Action overlay on map -->
-<div class="absolute bottom-4 right-4 flex flex-col gap-2">
-<button class="bg-surface p-2 rounded-lg shadow-md border border-outline-variant text-on-surface hover:bg-surface-container-low">
-<span class="material-symbols-outlined">add</span>
-</button>
-<button class="bg-surface p-2 rounded-lg shadow-md border border-outline-variant text-on-surface hover:bg-surface-container-low">
-<span class="material-symbols-outlined">remove</span>
-</button>
-<button class="bg-surface p-2 rounded-lg shadow-md border border-outline-variant text-on-surface hover:bg-surface-container-low mt-2">
-<span class="material-symbols-outlined">my_location</span>
-</button>
-</div>
-</div>
-<!-- Technician Roster (Horizontal Scroll) -->
-<div class="h-40 bg-surface border border-outline-variant rounded-xl flex flex-col shrink-0">
+
+<div class="h-44 bg-surface border border-outline-variant rounded-xl flex flex-col shrink-0">
 <div class="bg-surface-container-low p-2 border-b border-outline-variant px-4">
-<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase">Técnicos Disponibles (Zona Actual)</h3>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase">Técnicos Disponibles</h3>
 </div>
-<div class="flex-1 overflow-x-auto p-3 flex gap-4 items-center">
-<!-- Tech 1 -->
-<div class="min-w-[200px] border border-outline-variant rounded-lg p-3 hover:shadow-sm bg-surface cursor-pointer">
-<div class="flex items-center gap-3">
-<div class="relative">
-<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-bold">
-                                            JS
-                                        </div>
-<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-surface"></div>
-</div>
-<div>
-<p class="font-title-sm text-sm text-primary">Jorge Silva</p>
-<p class="font-body-sm text-xs text-on-surface-variant">CCTV / Alarmas</p>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-center">
-<span class="text-xs font-data-mono text-on-surface-variant">Carga: 40%</span>
-<button class="text-secondary text-xs font-bold hover:underline">Asignar</button>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-1 overflow-hidden">
-<div class="bg-secondary h-full rounded-full" style="width: 40%"></div>
-</div>
-</div>
-<!-- Tech 2 -->
-<div class="min-w-[200px] border border-outline-variant rounded-lg p-3 hover:shadow-sm bg-surface cursor-pointer">
-<div class="flex items-center gap-3">
-<div class="relative">
-<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-bold">
-                                            MR
-                                        </div>
-<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-surface"></div>
-</div>
-<div>
-<p class="font-title-sm text-sm text-primary">María Ríos</p>
-<p class="font-body-sm text-xs text-on-surface-variant">Redes / Control Acc.</p>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-center">
-<span class="text-xs font-data-mono text-on-surface-variant">Carga: 15%</span>
-<button class="text-secondary text-xs font-bold hover:underline">Asignar</button>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-1 overflow-hidden">
-<div class="bg-secondary h-full rounded-full" style="width: 15%"></div>
-</div>
-</div>
-<!-- Tech 3 -->
-<div class="min-w-[200px] border border-outline-variant rounded-lg p-3 hover:shadow-sm bg-surface-container-low opacity-70 cursor-not-allowed">
-<div class="flex items-center gap-3">
-<div class="relative">
-<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold">
-                                            LP
-                                        </div>
-<div class="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-surface"></div>
-</div>
-<div>
-<p class="font-title-sm text-sm text-primary">Luis Pérez</p>
-<p class="font-body-sm text-xs text-on-surface-variant">CCTV Avanzado</p>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-center">
-<span class="text-xs font-data-mono text-on-surface-variant">Carga: 95%</span>
-<span class="text-error text-xs font-bold">Ocupado</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-1 overflow-hidden">
-<div class="bg-error h-full rounded-full" style="width: 95%"></div>
-</div>
-</div>
-<!-- Tech 4 -->
-<div class="min-w-[200px] border border-outline-variant rounded-lg p-3 hover:shadow-sm bg-surface cursor-pointer">
-<div class="flex items-center gap-3">
-<div class="relative">
-<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-bold">
-                                            AM
-                                        </div>
-<div class="absolute bottom-0 right-0 w-3 h-3 bg-yellow-500 rounded-full border-2 border-surface"></div>
-</div>
-<div>
-<p class="font-title-sm text-sm text-primary">Ana Mendoza</p>
-<p class="font-body-sm text-xs text-on-surface-variant">Alarmas / Incendio</p>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-center">
-<span class="text-xs font-data-mono text-on-surface-variant">Carga: 60%</span>
-<button class="text-secondary text-xs font-bold hover:underline">Asignar</button>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-1 overflow-hidden">
-<div class="bg-yellow-500 h-full rounded-full" style="width: 60%"></div>
-</div>
-</div>
-</div>
+<div id="techsList" class="flex-1 overflow-x-auto p-3 flex gap-4 items-center"></div>
 </div>
 </div>
 </div>
 </div>
 </main>
 
+<!-- Modal Nueva Orden de Instalación -->
+<div id="installationModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-lg space-y-4">
+    <h3 class="text-title-sm font-bold text-primary">Nueva Orden de Instalación</h3>
+    <form id="installationForm" onsubmit="saveInstallationOrder(event)" class="space-y-3">
+      <div>
+        <label class="block text-xs font-bold text-on-surface-variant">Título / Descripción</label>
+        <input id="instTitleInput" required placeholder="Ej: Instalación CCTV (4 cámaras)" class="w-full border border-outline-variant rounded p-2 text-sm" type="text">
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-on-surface-variant">Zona</label>
+        <select id="instZoneInput" class="w-full border border-outline-variant rounded p-2 text-sm">
+          <option value="Zona Norte">Zona Norte</option>
+          <option value="Zona Sur">Zona Sur</option>
+          <option value="Zona Este">Zona Este</option>
+          <option value="Zona Oeste">Zona Oeste</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-on-surface-variant">Tiempo Estimado</label>
+        <input id="instTimeInput" required placeholder="Ej: 3 horas" class="w-full border border-outline-variant rounded p-2 text-sm" type="text">
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-on-surface-variant">Prioridad</label>
+        <select id="instPriorityInput" class="w-full border border-outline-variant rounded p-2 text-sm">
+          <option value="Alta Prio">Alta Prioridad</option>
+          <option value="Normal">Normal</option>
+        </select>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" onclick="closeInstallationModal()" class="px-4 py-2 border rounded text-sm">Cancelar</button>
+        <button type="submit" class="px-4 py-2 bg-secondary text-white rounded text-sm">Crear Orden</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-</body></html>
+<script>
+const SUPABASE_URL = window.ENV_SUPABASE_URL || 'https://tu-proyecto.supabase.co';
+const SUPABASE_ANON_KEY = window.ENV_SUPABASE_ANON_KEY || 'tu-anon-key';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let techOrders = JSON.parse(localStorage.getItem('tecno_assign_orders')) || [
+  { id: 'ORD-2023-089', title: 'Instalación CCTV (4 cámaras)', zone: 'Zona Norte', time: '4 horas', priority: 'Alta Prio', assignedTo: null },
+  { id: 'ORD-2023-090', title: 'Sistema de Alarma Básico', zone: 'Zona Sur', time: '2 horas', priority: 'Normal', assignedTo: null },
+  { id: 'ORD-2023-091', title: 'Control de Acceso Biométrico', zone: 'Zona Este', time: '3 horas', priority: 'Normal', assignedTo: null },
+  { id: 'ORD-2023-092', title: 'Mantenimiento Preventivo', zone: 'Zona Oeste', time: '1.5 horas', priority: 'Normal', assignedTo: null }
+];
+
+let techs = JSON.parse(localStorage.getItem('tecno_techs')) || [
+  { id: 1, name: 'Jorge Silva', skill: 'CCTV / Alarmas', load: 40, status: 'Disponible' },
+  { id: 2, name: 'María Ríos', skill: 'Redes / Control Acc.', load: 15, status: 'Disponible' },
+  { id: 3, name: 'Luis Pérez', skill: 'CCTV Avanzado', load: 95, status: 'Ocupado' },
+  { id: 4, name: 'Ana Mendoza', skill: 'Alarmas / Incendio', load: 60, status: 'Disponible' }
+];
+
+let selectedOrderId = null;
+
+function renderApp() {
+  localStorage.setItem('tecno_assign_orders', JSON.stringify(techOrders));
+  const zone = document.getElementById('zoneFilter').value;
+  const search = document.getElementById('techSearch').value.toLowerCase();
+
+  const filteredOrders = techOrders.filter(o => {
+    const matchZone = zone === 'ALL' || o.zone === zone;
+    const matchSearch = o.title.toLowerCase().includes(search) || o.id.toLowerCase().includes(search);
+    return matchZone && matchSearch;
+  });
+
+  document.getElementById('pendingCount').innerText = techOrders.filter(o => !o.assignedTo).length;
+  document.getElementById('activeTechsCount').innerText = `${techs.filter(t => t.status === 'Disponible').length}/${techs.length}`;
+
+  const ordersContainer = document.getElementById('techOrdersList');
+  ordersContainer.innerHTML = filteredOrders.map(o => `
+    <div onclick="selectOrder('${o.id}')" class="p-3 border rounded-lg cursor-pointer transition-colors ${selectedOrderId === o.id ? 'border-secondary bg-secondary-fixed' : 'border-outline-variant hover:bg-surface-container-high'}">
+      <div class="flex justify-between items-start mb-1">
+        <span class="font-data-mono text-xs bg-surface-container-high px-2 py-0.5 rounded">${o.id}</span>
+        ${o.assignedTo ? `<span class="bg-green-100 text-green-800 text-[10px] px-2 py-0.5 rounded font-bold">Asignado: ${o.assignedTo}</span>` : `<span class="bg-error-container text-on-error-container text-[10px] px-2 py-0.5 rounded font-bold">${o.priority}</span>`}
+      </div>
+      <h4 class="font-title-sm text-sm font-bold text-primary">${o.title}</h4>
+      <p class="text-xs text-on-surface-variant">${o.zone} - ${o.time}</p>
+    </div>
+  `).join('');
+
+  const techsContainer = document.getElementById('techsList');
+  techsContainer.innerHTML = techs.map(t => `
+    <div class="min-w-[200px] border border-outline-variant rounded-lg p-3 bg-surface">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-xs">${t.name.split(' ').map(n=>n[0]).join('')}</div>
+        <div>
+          <p class="font-bold text-xs text-primary">${t.name}</p>
+          <p class="text-[10px] text-on-surface-variant">${t.skill}</p>
+        </div>
+      </div>
+      <div class="mt-2 flex justify-between items-center text-xs">
+        <span>Carga: ${t.load}%</span>
+        ${t.status === 'Ocupado' ? `<span class="text-error font-bold">Ocupado</span>` : `
+          <button onclick="assignTech('${t.name}')" ${!selectedOrderId ? 'disabled' : ''} class="text-secondary font-bold hover:underline disabled:opacity-40">Asignar</button>
+        `}
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectOrder(id) {
+  selectedOrderId = id;
+  const o = techOrders.find(item => item.id === id);
+  document.getElementById('selectedOrderInfo').innerHTML = `
+    <p class="font-bold text-base text-primary">${o.id}: ${o.title}</p>
+    <p class="text-xs text-on-surface-variant">${o.zone} | Carga estimada: ${o.time}</p>
+    <p class="text-xs mt-1 ${o.assignedTo ? 'text-green-600 font-bold' : 'text-secondary font-bold'}">
+      ${o.assignedTo ? 'Asignado actualmente a: ' + o.assignedTo : 'Seleccione un técnico abajo para asignar'}
+    </p>
+  `;
+  renderApp();
+}
+
+async function assignTech(techName) {
+  if (!selectedOrderId) return;
+  techOrders = techOrders.map(o => o.id === selectedOrderId ? { ...o, assignedTo: techName } : o);
+  
+  // Actualizar Supabase
+  try {
+    await supabaseClient.from('ordenes_instalacion').update({ assignedTo: techName }).eq('id', selectedOrderId);
+  } catch (err) { console.error('Error actualizando Supabase:', err); }
+
+  selectOrder(selectedOrderId);
+}
+
+function openInstallationModal() { document.getElementById('installationModal').classList.remove('hidden'); document.getElementById('installationModal').classList.add('flex'); }
+function closeInstallationModal() { document.getElementById('installationModal').classList.add('hidden'); document.getElementById('installationModal').classList.remove('flex'); }
+
+async function saveInstallationOrder(e) {
+  e.preventDefault();
+  const newInstOrder = {
+    id: `ORD-2023-${Math.floor(100 + Math.random() * 900)}`,
+    title: document.getElementById('instTitleInput').value,
+    zone: document.getElementById('instZoneInput').value,
+    time: document.getElementById('instTimeInput').value,
+    priority: document.getElementById('instPriorityInput').value,
+    assignedTo: null
+  };
+
+  techOrders.unshift(newInstOrder);
+  renderApp();
+
+  // Guardado en Supabase
+  try {
+    await supabaseClient.from('ordenes_instalacion').insert([newInstOrder]);
+  } catch (err) { console.error('Error enviando a Supabase:', err); }
+
+  closeInstallationModal();
+  document.getElementById('installationForm').reset();
+}
+
+document.addEventListener('DOMContentLoaded', renderApp);
+</script>
+</body>
+</html>
